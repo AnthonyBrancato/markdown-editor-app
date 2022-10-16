@@ -1,24 +1,44 @@
-import React from 'react';
-import logo from './logo.svg';
+import { Drawer } from 'components/common/Drawer';
+import { DrawerManager } from 'components/common/DrawerManager';
+import { Markdown } from 'components/Markdown/Markdown';
+import { MarkdownPreview } from 'components/MarkdownPreview/MarkdownPreview';
+import { FaSave, FaRegTrashAlt } from 'react-icons/fa';
 import './App.css';
+import { ActionBar } from 'components/ActionBar/ActionBar';
+import { Divider } from '@chakra-ui/react';
+import { TextAreaManager } from 'components/common/TextAreaManager';
 
 function App() {
+  const actions = [
+    {
+      icon: <FaRegTrashAlt />,
+      iconBtn: true,
+      btnLabel: 'delete markdown',
+    },
+    {
+      icon: <FaSave />,
+      btnLabel: 'Save changes',
+      iconBtn: false,
+    },
+  ];
+
+  const leftActions = {
+    title: 'Markdown',
+    menuComponent: <Drawer />,
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <DrawerManager>
+        <TextAreaManager>
+          <ActionBar actions={actions} leftActions={leftActions} />
+          <div className="flex justify-around h-screen">
+            <Markdown />
+            <Divider orientation="vertical" colorScheme="gray" />
+            <MarkdownPreview />
+          </div>
+        </TextAreaManager>
+      </DrawerManager>
     </div>
   );
 }

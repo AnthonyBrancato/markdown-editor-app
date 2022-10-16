@@ -1,0 +1,9 @@
+.markdown-c__right-actions-button.chakra-button {
+    background-color: var(--primary-orange);
+    color: var(--primary-white);
+}
+
+.markdown-c__right-actions-button.chakra-button:hover {
+    background-color: var(--primary-orange--light);
+    color: var(--primary-black);
+}

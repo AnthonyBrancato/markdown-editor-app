@@ -1,0 +1,7 @@
+.markdown-c__textarea.chakra-textarea {
+    height: 100vh !important;
+    border-radius: 0 !important;
+    resize: none !important;
+    border: none !important;
+    outline: 0 !important;
+}

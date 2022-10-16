@@ -1,0 +1,15 @@
+.markdown-c__header {
+    background-color: var(--primary-black-700);
+}
+
+.markdown-c__content {
+    background-color: var(--primary-black--900);
+}
+
+.markdown-c__content--text {
+    color: var(--primary-grey--400);
+}
+
+.markdown-c__preview--title {
+    color: var(--primary-grey--400);
+}
