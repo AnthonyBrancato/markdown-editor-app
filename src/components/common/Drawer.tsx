@@ -14,9 +14,21 @@ import { useDrawerContextManager } from './DrawerManager';
 import '../../styles/components/common/DrawerContent.css';
 import { Button } from 'components/Button/Button';
 import { DrawerItems } from './DrawerItems';
+import { Modal } from 'components/Modal/Modal';
 
 export function Drawer() {
   const { isOpen, onClose, onOpen } = useDrawerContextManager();
+  const [modalIsOpen, setModalIsOpen] = React.useState<boolean>(false);
+
+  const openModal = React.useCallback(() => {
+    setModalIsOpen(true);
+    console.log('hroihgoih');
+  }, []);
+
+  const closeModal = React.useCallback(() => {
+    setModalIsOpen(false);
+  }, []);
+
   return (
     <React.Fragment>
       <IconButton
@@ -31,7 +43,9 @@ export function Drawer() {
               My documents
             </Heading>
             <div>
-              <Button leftIcon={<IoMdAdd />}>New document</Button>
+              <Button leftIcon={<IoMdAdd />} onClick={openModal}>
+                New document
+              </Button>
             </div>
           </DrawerHeader>
           <DrawerBody>
@@ -39,6 +53,21 @@ export function Drawer() {
           </DrawerBody>
         </DrawerContent>
       </ChakraUIDrawer>
+      {isOpen ? (
+        <Modal
+          isOpen={modalIsOpen}
+          onClose={closeModal}
+          onOpen={openModal}
+          title="Add a new document"
+        >
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos modi
+            temporibus mollitia commodi, laudantium nostrum laborum explicabo
+            non repudiandae reprehenderit obcaecati, accusamus amet illo
+            provident quo quaerat quas corrupti omnis.
+          </p>
+        </Modal>
+      ) : null}
     </React.Fragment>
   );
 }
