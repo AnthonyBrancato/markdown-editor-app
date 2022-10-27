@@ -1,0 +1,19 @@
+.markdown-c__modal-body {
+    background-color: var(--primary-black--900) !important;
+}
+
+.markdown-c__modal-footer {
+    background-color: var(--primary-black--900) !important;
+}
+
+.markdown-c__modal-header {
+    color: var(--primary-white);
+}
+
+.markdown-c__modal-form-label {
+    color: var(--primary-white);
+}
+
+.markdown-c__modal-form-label__text-input {
+    color: var(--primary-white);
+}

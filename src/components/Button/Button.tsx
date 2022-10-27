@@ -3,6 +3,7 @@ import {
   ButtonProps as ChakraUIButtonProps,
   Stack,
 } from '@chakra-ui/react';
+import clsx from 'clsx';
 
 import '../../styles/components/Button.css';
 
@@ -16,7 +17,8 @@ export function Button({
   rightIcon,
   variant,
   colorScheme,
-  className = 'markdown-c__right-actions-button',
+  onClick,
+  className,
 }: ButtonProps) {
   return (
     <Stack direction="row" spacing={4}>
@@ -25,7 +27,8 @@ export function Button({
         rightIcon={rightIcon}
         colorScheme={colorScheme}
         variant={variant}
-        className={className}
+        className={clsx('markdown-c__right-actions-button', className)}
+        onClick={onClick}
       >
         {children}
       </ChakraUIButton>
