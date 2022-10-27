@@ -22,7 +22,6 @@ export function Drawer() {
 
   const openModal = React.useCallback(() => {
     setModalIsOpen(true);
-    console.log('hroihgoih');
   }, []);
 
   const closeModal = React.useCallback(() => {
@@ -59,14 +58,7 @@ export function Drawer() {
           onClose={closeModal}
           onOpen={openModal}
           title="Add a new document"
-        >
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos modi
-            temporibus mollitia commodi, laudantium nostrum laborum explicabo
-            non repudiandae reprehenderit obcaecati, accusamus amet illo
-            provident quo quaerat quas corrupti omnis.
-          </p>
-        </Modal>
+        />
       ) : null}
     </React.Fragment>
   );

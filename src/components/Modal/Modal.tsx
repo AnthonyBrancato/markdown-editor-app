@@ -3,10 +3,8 @@ import * as React from 'react';
 import {
   ModalBody,
   ModalContent,
-  ModalFooter,
   Modal as ChakraUIModal,
   ModalOverlay,
-  ModalHeader,
   FormControl,
   FormLabel,
   Input,
@@ -14,9 +12,40 @@ import {
 import { Button } from 'components/Button/Button';
 
 import 'styles/components/Modal.css';
+import { ModalFooter } from 'components/ModalFooter/ModalFooter';
+import { ModalHeader } from 'components/ModalHeader/ModalHeader';
+import { formattedISODate } from 'helpers/formattedISODate';
+
+const { REACT_APP_API_BASE_URL } = process.env;
 
 export function Modal({ onClose, isOpen, title }: any) {
   const initialRef = React.useRef(null);
+  const [inputName, setInputName] = React.useState('');
+
+  const onNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setInputName(event.target.value);
+  };
+
+  const formattedDate = formattedISODate(new Date());
+  const onSubmit = async () => {
+    const requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name: inputName,
+        createdAt: formattedDate,
+      }),
+    };
+
+    console.log(requestOptions);
+
+    const response = await fetch(
+      `${REACT_APP_API_BASE_URL}api/v1/markdowns`,
+      requestOptions
+    );
+    const data = await response.json();
+    console.log(data);
+  };
 
   return (
     <ChakraUIModal
@@ -28,36 +57,29 @@ export function Modal({ onClose, isOpen, title }: any) {
       <ModalOverlay />
       <ModalContent className="bg-slate-900">
         <ModalBody pb={6} className="markdown-c__modal-body">
-          <ModalHeader className="markdown-c__modal-header">
-            {title}
-          </ModalHeader>
-          <FormControl>
-            <FormLabel className="markdown-c__modal-form-label">
-              First name
-            </FormLabel>
-            <Input
-              placeholder="For example: Welcome"
-              className="markdown-c__modal-form-label__text-input"
-            />
-          </FormControl>
+          <ModalHeader title={title} />
+          <form onSubmit={onSubmit}>
+            <FormControl>
+              <FormLabel className="text-white" htmlFor="name">
+                Title
+              </FormLabel>
+              <Input
+                className="text-white"
+                id="name"
+                name="name"
+                type="name"
+                onChange={onNameChange}
+              />
+            </FormControl>
+          </form>
         </ModalBody>
-        <ModalFooter className="markdown-c__modal-footer">
-          <Button className="mr-3">Save</Button>
+        <ModalFooter>
           <Button onClick={onClose}>Close</Button>
+          <Button className="ml-3" type="submit" onClick={onSubmit}>
+            Save
+          </Button>
         </ModalFooter>
       </ModalContent>
     </ChakraUIModal>
   );
 }
-
-/**
- * 
- * 
- * <ModalHeader>Create new markdown file</ModalHeader>
-        <ModalCloseButton />
-        <ModalBody>hello</ModalBody>
-        <ModalFooter>
-          <Button onClick={onClose}>Close</Button>
-        </ModalFooter>
- * 
- */
